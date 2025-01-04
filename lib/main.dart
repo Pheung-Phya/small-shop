@@ -15,14 +15,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SettingController());
     return GetMaterialApp(
-      // themeMode: SettingController.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
-      theme: ThemeData.light(),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomeProduct(),
-        '/card': (context) => const CardProduct(),
-        '/checkout': (context) => const CheckoutProduct(),
+        '/': (context) => HomeProduct(),
+        '/card': (context) => CardProduct(),
+        '/checkout': (context) => CheckoutProduct(),
         '/setting': (context) => Setting()
       },
     );

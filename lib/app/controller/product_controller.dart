@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 import 'package:state_management/app/model/product.dart';
 
-class ShopController extends GetxController {
+class ProductController extends GetxController {
   var cart = <Product>[].obs;
 
   var products = <Product>[
-    Product(name: 'T-shirt', price: 20.0, image: 'assets/tshirt.png'),
-    Product(name: 'Shoes', price: 50.0, image: 'assets/shoes.png'),
-    Product(name: 'Hat', price: 15.0, image: 'assets/hat.png'),
+    Product(name: 'Boostrong', price: 20.0, image: 'assets/boostrong.jpg'),
+    Product(name: 'Carabao', price: 50.0, image: 'assets/carabao.jpg'),
+    Product(name: 'Ganzberg', price: 15.0, image: 'assets/ganzberg.jpg'),
   ].obs;
 
   void addToCart(Product product) {
@@ -23,6 +23,8 @@ class ShopController extends GetxController {
   void checkout() {
     if (cart.isEmpty) {
       Get.snackbar('Empty Cart', 'Your cart is empty, add some items first');
-    } else {}
+    } else {
+      Get.toNamed('/checkout');
+    }
   }
 }

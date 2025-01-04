@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:state_management/app/controller/product_controller.dart';
 
 class HomeProduct extends StatelessWidget {
-  const HomeProduct({super.key});
+  HomeProduct({super.key});
+
+  final controller = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -10,13 +13,13 @@ class HomeProduct extends StatelessWidget {
       drawer: Drawer(
         child: Column(
           children: [
-            DrawerHeader(child: Text('Header')),
+            const DrawerHeader(child: Text('Header')),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Setting'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Setting'),
               onTap: () {
+                Get.back();
                 Get.toNamed('/setting');
-                // Get.back();
               },
             )
           ],
@@ -35,11 +38,41 @@ class HomeProduct extends StatelessWidget {
       ),
       body: Column(
         children: [
+          Expanded(
+            child: Obx(() {
+              return ListView.builder(
+                itemCount: controller.products.length,
+                itemBuilder: (context, index) {
+                  final product = controller.products[index];
+                  return ListTile(
+                    leading: Image.asset(product.image),
+                    title: Text(product.name),
+                    subtitle: Text('\$${product.price}'),
+                    trailing: IconButton(
+                      icon: Icon(Icons.add_shopping_cart),
+                      onPressed: () {
+                        controller.addToCart(product);
+                      },
+                    ),
+                  );
+                },
+              );
+            }),
+          ),
+          Divider(),
+          Obx(() {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Total: \$${controller.totalPrice}',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            );
+          }),
           ElevatedButton(
-              onPressed: () {
-                Get.toNamed('/card');
-              },
-              child: Text('to card'))
+            onPressed: controller.checkout,
+            child: Text('Go to Checkout'),
+          ),
         ],
       ),
     );

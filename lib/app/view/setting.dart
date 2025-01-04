@@ -5,7 +5,7 @@ import 'package:state_management/app/controller/setting_controller.dart';
 class Setting extends StatelessWidget {
   Setting({super.key});
 
-  final SettingController themeMode = Get.put(SettingController());
+  final SettingController themeMode = Get.find<SettingController>();
 
   @override
   Widget build(BuildContext context) {
