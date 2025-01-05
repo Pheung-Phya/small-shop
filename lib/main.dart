@@ -7,6 +7,7 @@ import 'package:state_management/app/view/home_product.dart';
 import 'package:state_management/app/view/setting.dart';
 
 void main() {
+  Get.put(SettingController());
   runApp(const MyApp());
 }
 
@@ -15,7 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SettingController());
     return GetMaterialApp(
       initialRoute: '/',
       routes: {

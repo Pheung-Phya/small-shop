@@ -21,7 +21,7 @@ class HomeProduct extends StatelessWidget {
                 Get.back();
                 Get.toNamed('/setting');
               },
-            )
+            ),
           ],
         ),
       ),
@@ -49,7 +49,7 @@ class HomeProduct extends StatelessWidget {
                     title: Text(product.name),
                     subtitle: Text('\$${product.price}'),
                     trailing: IconButton(
-                      icon: Icon(Icons.add_shopping_cart),
+                      icon: const Icon(Icons.add_shopping_cart),
                       onPressed: () {
                         controller.addToCart(product);
                       },
@@ -59,19 +59,20 @@ class HomeProduct extends StatelessWidget {
               );
             }),
           ),
-          Divider(),
+          const Divider(),
           Obx(() {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Total: \$${controller.totalPrice}',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                'Total: \$${controller.totalPrice.toStringAsFixed(2)}',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             );
           }),
           ElevatedButton(
             onPressed: controller.checkout,
-            child: Text('Go to Checkout'),
+            child: const Text('Go to Checkout'),
           ),
         ],
       ),
